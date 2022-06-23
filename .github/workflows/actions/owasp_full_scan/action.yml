@@ -4,6 +4,8 @@ inputs:
   target:
     description: The domain name to run the scan against
     required: true
+  GITHUB_TOKEN:
+    required: true
 
 runs:
   using: composite
@@ -15,7 +17,7 @@ runs:
     - name: ZAP FULL Scan
       uses: zaproxy/action-full-scan@v0.3.0
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ inputs.GITHUB_TOKEN }}
         docker_name: owasp/zap2docker-stable
         target: https://${{ env.TARGET }}/sandbox
         rules_file_name: .zap/rules.tsv

@@ -243,8 +243,10 @@ jobs:
         uses: ./.github/workflows/actions/owasp_full_scan
         with:
           target: "${{ env.ENVIRONMENT }}.london.cloudapps.digital"
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Run OWasp API vulnerability scan
         uses: ./.github/workflows/actions/owasp_api_scan
         with:
           target: "${{ env.ENVIRONMENT }}.london.cloudapps.digital"
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
