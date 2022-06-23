@@ -12,18 +12,6 @@ runs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Notify Slack of Start
-      if: inputs.environment == "Production" || inputs.environment == "Staging"
-      uses: rtCamp/action-slack-notify@v2.2.0
-      env:
-        SLACK_CHANNEL: cpd-dev-alerts
-        SLACK_USERNAME: Zap2Docker
-        SLACK_ICON: https://avatars.githubusercontent.com/u/6716868?s=100&v=4
-        SLACK_TITLE: OWASP Full scan starting!
-        SLACK_MESSAGE: Beginning OWasp full scan against https://${{ env.TARGET }}
-        MSG_MINIMAL: true
-        SLACK_WEBHOOK: ${{ secrets.ALERTMANAGER_SLACK_URL }}
-
     - name: ZAP FULL Scan
       uses: zaproxy/action-full-scan@v0.3.0
       with:
@@ -47,16 +35,3 @@ runs:
     - uses: geekyeggo/delete-artifact@v1
       with:
         name: zap_scan
-
-    - name: Notify Slack of Completion
-      if: inputs.environment == "Production" || inputs.environment == "Staging"
-      uses: rtCamp/action-slack-notify@v2.2.0
-      env:
-        SLACK_CHANNEL: cpd-dev-alerts
-        SLACK_USERNAME: Zap2Docker
-        SLACK_ICON: https://avatars.githubusercontent.com/u/6716868?s=100&v=4
-        SLACK_TITLE: OWASP Full scan completed!
-        SLACK_MESSAGE: OWasp scan completed against https://${{ env.TARGET }}
-        SLACK_COLOR: ${{ job.status }}
-        MSG_MINIMAL: actions url
-        SLACK_WEBHOOK: ${{ secrets.ALERTMANAGER_SLACK_URL }}
