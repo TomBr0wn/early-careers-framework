@@ -248,7 +248,7 @@ jobs:
   owasp-api-scan:
     if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-20.04
-    needs: [deploy]
+    needs: [owasp-full-scan]
 
     steps:
       - name: setup-inputs

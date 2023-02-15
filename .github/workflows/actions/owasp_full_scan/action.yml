@@ -36,6 +36,7 @@ runs:
         name: full_scan_report
         path: ~/full_scan_report
 
-    - uses: geekyeggo/delete-artifact@v1
+    - uses: geekyeggo/delete-artifact@v2
       with:
         name: zap_scan
+        failOnError: false

@@ -15,7 +15,7 @@ runs:
       uses: actions/checkout@v3
 
     - name: ZAP API Scan
-      uses: zaproxy/action-api-scan@v0.1.1
+      uses: zaproxy/action-api-scan@v0.2.0
       with:
         token: ${{ inputs.GITHUB_TOKEN }}
         target: https://${{ inputs.TARGET }}/lead-providers/api-docs/v1/api_spec.yml
@@ -37,6 +37,7 @@ runs:
         name: api_scan_report
         path: ~/api_scan_report
 
-    - uses: geekyeggo/delete-artifact@v1
+    - uses: geekyeggo/delete-artifact@v2
       with:
         name: zap_scan
+        failOnError: false
